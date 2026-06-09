@@ -1,117 +1,438 @@
-# Artify — Creative Hub for 3D & AI Artists 🎨🚀
+# 🎨 ArtifyAI — AI-Powered Creative Platform for 3D Artists & Digital Creators
 
-Artify is a high-performance, premium web application designed for 3D modelers and AI digital artists. Creators can share their publications, upload and display spatial 3D models (GLTF/GLB) with an interactive 3D viewer, generate brand-new AI masterworks using Google AI Studio (Gemini API with Imagen 4), and chat with fellow designers in real-time.
-
----
-
-## 🛠️ Technology Stack
-
-- **Frontend**: Next.js (App Router), React, Lucide Icons, Framer Motion, Three.js / React Three Fiber (for 3D preview), CSS Modules
-- **Backend**: Node.js, Express API, Socket.io (Real-time DMs)
-- **Database & Storage**: Supabase (PostgreSQL Database & S3 Storage Buckets)
-- **Authentication**: Clerk (User sessions, Profile management, Secure Auth)
-- **AI Synthesis**: Google AI Studio (Gemini API - Imagen 4 model `imagen-4.0-generate-001`)
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![React](https://img.shields.io/badge/React-19-blue)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-green)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E)
+![Clerk](https://img.shields.io/badge/Authentication-Clerk-purple)
+![Socket.io](https://img.shields.io/badge/Socket.io-Real--Time-orange)
+![Google AI](https://img.shields.io/badge/Google_AI-Gemini_Imagen_4-red)
 
 ---
 
-## 📁 Repository Structure
+## 🚀 Overview
+
+**Artify** is a modern full-stack creative platform built for **3D artists, AI creators, digital designers, and creative communities**. The platform enables users to showcase their artwork, upload interactive 3D models, generate AI-powered images, publish creative content, and communicate with other creators through real-time messaging.
+
+The application combines **Artificial Intelligence, Cloud Infrastructure, Real-Time Communication, Secure Authentication, and Interactive 3D Visualization** into a unified creator ecosystem.
+
+---
+
+## ✨ Core Features
+
+### 🤖 AI Image Generation
+
+* Generate high-quality artwork using **Google AI Studio (Gemini API - Imagen 4)**.
+* Intelligent fallback mechanism for uninterrupted image generation.
+* Server-side image processing for enhanced reliability.
+* Fast response times with optimized API workflows.
+
+### 🧊 Interactive 3D Model Showcase
+
+* Upload and display GLTF/GLB models.
+* Real-time rendering using Three.js and React Three Fiber.
+* Interactive controls including:
+
+  * Rotation
+  * Zoom
+  * Pan
+  * Model Inspection
+
+### 📝 Creative Publishing
+
+* Create and share publications.
+* Showcase artwork and projects.
+* Category-based content organization.
+* Responsive publication management.
+
+### 👤 Professional Creator Profiles
+
+* Custom profile avatars.
+* Personalized profile banners.
+* Creator portfolio pages.
+* Publication history and activity tracking.
+
+### 💬 Real-Time Messaging
+
+* Instant creator-to-creator communication.
+* WebSocket-powered messaging.
+* Message synchronization.
+* Persistent chat history.
+
+### 🔒 Authentication & Security
+
+* Secure authentication with Clerk.
+* Session management.
+* Protected routes.
+* Role-based access control.
+* Supabase Row-Level Security (RLS).
+
+### ☁️ Cloud Storage
+
+* Secure file uploads.
+* Scalable storage architecture.
+* Automatic storage bucket management.
+* Optimized media delivery.
+
+---
+
+# 🏗️ System Architecture
+
+```text
+┌───────────────────────────────────────────┐
+│                 Users                     │
+│  Artists • Creators • Designers           │
+└─────────────────┬─────────────────────────┘
+                  │
+                  ▼
+┌───────────────────────────────────────────┐
+│          Next.js Frontend (React)         │
+│                                           │
+│ • Feed & Publications                     │
+│ • Profile Management                      │
+│ • AI Image Generator                      │
+│ • 3D Model Viewer                         │
+│ • Real-Time Chat                          │
+└───────────────┬───────────────┬───────────┘
+                │               │
+                │ REST API      │ WebSocket
+                ▼               ▼
+┌─────────────────────┐   ┌────────────────┐
+│   Express Backend   │   │   Socket.io    │
+│                     │   │ Real-Time Chat │
+│ • Posts API         │   └────────────────┘
+│ • Upload API        │
+│ • Profile API       │
+│ • AI Generation API │
+└──────┬─────────┬────┘
+       │         │
+       ▼         ▼
+┌────────────┐  ┌───────────────────┐
+│   Clerk    │  │ Google AI Studio  │
+│ Auth       │  │ Gemini + Imagen 4 │
+└────────────┘  └───────────────────┘
+       │
+       ▼
+┌─────────────────────────────────────┐
+│             Supabase                │
+│                                     │
+│ PostgreSQL Database                 │
+│ • Profiles                          │
+│ • Posts                             │
+│ • Messages                          │
+│ • Models                            │
+│                                     │
+│ Storage Buckets                     │
+│ • Avatars                           │
+│ • Banners                           │
+│ • Posts                             │
+│ • Models                            │
+└─────────────────────────────────────┘
+```
+
+---
+
+# 🔄 Application Workflow
+
+```text
+Start
+ │
+ ▼
+User Login / Registration
+ │
+ ▼
+Access Dashboard
+ │
+ ├─────────────┬─────────────┬─────────────┐
+ ▼             ▼             ▼             ▼
+
+Create Post  Upload 3D   Generate AI    Chat
+             Model       Artwork        Users
+
+ │             │             │             │
+ ▼             ▼             ▼             ▼
+
+Store in    Store in     Gemini API    Socket.io
+Database    Storage      Processing    Messaging
+
+ │             │             │             │
+ └─────────────┴─────────────┴─────────────┘
+               │
+               ▼
+
+      Feed & Community Hub
+
+               │
+               ▼
+
+              End
+```
+
+---
+
+# 🤖 AI Generation Workflow
+
+```text
+User Prompt
+     │
+     ▼
+Frontend Interface
+     │
+     ▼
+Express API
+     │
+     ▼
+Gemini Imagen 4
+     │
+     ├── Success
+     │      │
+     │      ▼
+     │ Generated Image
+     │      │
+     │      ▼
+     │ Display Result
+     │
+     └── Failure / Quota Limit
+             │
+             ▼
+      LoremFlickr Fallback
+             │
+             ▼
+       Display Result
+```
+
+---
+
+# 💬 Real-Time Messaging Workflow
+
+```text
+User A
+ │
+ ▼
+Socket.io Client
+ │
+ ▼
+Socket.io Server
+ │
+ ▼
+Store Message
+(Supabase)
+ │
+ ▼
+Broadcast Event
+ │
+ ▼
+User B
+```
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+* Next.js (App Router)
+* React.js
+* TypeScript
+* CSS Modules
+* Framer Motion
+* Lucide Icons
+* Three.js
+* React Three Fiber
+
+## Backend
+
+* Node.js
+* Express.js
+* Socket.io
+
+## Database & Storage
+
+* Supabase PostgreSQL
+* Supabase Storage Buckets
+
+## Authentication
+
+* Clerk
+
+## Artificial Intelligence
+
+* Google AI Studio
+* Gemini API
+* Imagen 4
+
+## Deployment Ready
+
+* Vercel
+* Railway
+* Render
+* VPS
+* Docker Compatible
+
+---
+
+# 📂 Project Structure
 
 ```text
 Artify/
-├── backend/                  # Express API server & Sockets
+│
+├── backend/
 │   ├── src/
-│   │   ├── lib/supabase.js   # Supabase client & storage helpers
-│   │   ├── routes/           # REST endpoints (auth, posts, chat, upload, generate)
-│   │   └── server.js         # Entry point (Express + Socket.io listener)
-│   ├── .env                  # Backend credentials (Supabase, Clerk, Gemini)
+│   │   ├── lib/
+│   │   │   └── supabase.js
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── auth.js
+│   │   │   ├── posts.js
+│   │   │   ├── upload.js
+│   │   │   ├── generate.js
+│   │   │   └── chat.js
+│   │   │
+│   │   └── server.js
+│   │
+│   ├── .env
 │   └── package.json
-├── frontend/                 # Next.js web application
-│   ├── src/app/              # Next.js pages (profile, chat, generate, feed)
-│   ├── .env.local            # Frontend credentials (Clerk, Supabase)
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   └── styles/
+│   │
+│   ├── .env.local
 │   └── package.json
-├── supabase-schema.sql       # PostgreSQL table schemas & RLS policies
-└── .gitignore                # Global git ignore configuration
+│
+├── supabase-schema.sql
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-## 🔑 Environment Setup
+# 🔐 Environment Variables
 
-### 1. Backend (`backend/.env`)
-Create a `.env` file in the `backend/` folder:
+## Backend (.env)
+
 ```env
 PORT=5000
 
-# Supabase Credentials (uses service_role key to bypass RLS)
-SUPABASE_URL=https://your-project-id.supabase.co
-SUPABASE_SERVICE_KEY=your-service-role-key
+SUPABASE_URL=
+SUPABASE_SERVICE_KEY=
 
-# Clerk Authentication Secrets
-CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
+CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
 
-# Gemini API Key (AI Image Lab)
-GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_API_KEY=
 ```
 
-### 2. Frontend (`frontend/.env.local`)
-Create a `.env.local` file in the `frontend/` folder:
+## Frontend (.env.local)
+
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
 NEXT_PUBLIC_SOCKET_URL=http://localhost:5000
 
-# Clerk Keys
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
 
-# Supabase Keys
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
 ---
 
-## 💾 Database & Storage Setup
+# ⚡ Installation
 
-1. **Database Tables**: Go to **Supabase Dashboard > SQL Editor > New Query**, paste the contents of `supabase-schema.sql` (located in the root folder), and click **Run**. This will create the required tables (`profiles`, `posts`, `messages`, `models`) and configure relations.
-2. **Storage Buckets**: The backend is configured to **automatically verify and create** all required storage buckets on startup. When you start the backend server, it will check for and create the following buckets as **Public**:
-   - `avatars` (For profile photos)
-   - `banners` (For profile header banners)
-   - `posts` (For user publications)
-   - `models` (For 3D spatial files & thumbnails)
+## Clone Repository
+
+```bash
+git clone https://github.com/yourusername/artify.git
+cd artify
+```
 
 ---
 
-## ⚡ How to Run
+## Backend Setup
 
-Open two terminal windows:
-
-### Run Backend
 ```bash
 cd backend
 npm install
 npm run dev
 ```
 
-### Run Frontend
+---
+
+## Frontend Setup
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Open your browser and navigate to `http://localhost:3000`.
 
 ---
 
-## 🚀 Key Improvements & Updates (June 2026)
+## Open Application
 
-- **AI Lab Integration (Gemini Imagen 4)**: Transitioned image generation from Replicate completely to Google AI Studio's **Imagen 4** model (`imagen-4.0-generate-001`). Cleaned up and removed all old Replicate references and packages from the project.
-- **Robust Keyword Fallback (LoremFlickr)**: Integrated a high-speed, 100% free fallback using LoremFlickr (extracting relevant prompt keywords using a smart stop-word filter) if the AI key is missing, hits a quota, or returns a billing limit error.
-- **Base64 Server-Side Encoding**: Base64 data encoding has been shifted entirely to the backend, ensuring browser-level requests bypass CORS, mixed content, or domain blocks.
-- **Auto-Provisioning Buckets**: Backend automatically initializes and configures Supabase Storage buckets on startup with proper public access.
-- **Cache-Busting for Profile Images**: Implemented dynamic URL query tags (`?t=timestamp`) to bypass aggressive browser caching so new avatars and banners load instantly on upload.
-- **Secure File Uploads**: Replaced base64 database writes inside the Edit Profile Modal with direct-to-Supabase file streams, ensuring lightweight database records and avoiding database payload limits.
-- **DM Alignment & Key Mapping**: Aligned database message schemas (snake_case) with Socket.io objects (camelCase) to ensure sent/received messages align on the correct sides of the viewport on refresh.
-- **Publication Deletion**: Added a responsive, animated delete button on profile publication cards (only visible to profile owners) to easily remove posts with soft confirmation dialogs.
-- **Category-Balanced Seed Merge**: Seeded exactly 10 mock posts across 5 categories and 5 creators. Implemented a smart frontend merging system that displays database uploads at the top while keeping the feed populated with seed posts.
-- **Codebase Sanitization**: Deleted all 15+ legacy test scripts, test images, and temporary folders to keep the repository extremely clean, lightweight, and production-ready.
+```bash
+http://localhost:3000
+```
+
+---
+
+# 📈 Major Enhancements (2026)
+
+### AI Infrastructure
+
+* Migrated from Replicate to Gemini Imagen 4.
+* Implemented intelligent fallback generation.
+
+### Storage Optimization
+
+* Automatic Supabase bucket provisioning.
+* Direct file uploads.
+* Optimized storage workflows.
+
+### Performance Improvements
+
+* Server-side image encoding.
+* Cache-busting profile updates.
+* Faster media delivery.
+
+### Messaging Enhancements
+
+* Schema alignment between database and Socket.io.
+* Reliable real-time synchronization.
+
+### Feed Management
+
+* Category-balanced seeded content.
+* Dynamic database content merging.
+
+### Codebase Maintenance
+
+* Removed legacy test files.
+* Reduced technical debt.
+* Improved maintainability.
+
+---
+
+# 🎯 Learning Outcomes
+
+This project demonstrates expertise in:
+
+* Full-Stack Development
+* Next.js Application Architecture
+* REST API Development
+* Real-Time Systems
+* WebSocket Communication
+* AI Integration
+* Cloud Storage Management
+* Database Design
+* Authentication & Security
+* 3D Rendering & Visualization
+* Performance Optimization
+* Scalable System Design
+
+---
