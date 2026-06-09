@@ -1,0 +1,675 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.profileHeader {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+/* Header Banner style */
+.bannerGrid {
+  height: 200px;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(236, 72, 153, 0.2) 100%);
+  position: relative;
+}
+
+.bannerOverlay {
+  display: none;
+}
+
+.profileContent {
+  display: flex;
+  padding: 0 30px 30px 30px;
+  gap: 30px;
+  position: relative;
+  z-index: 5;
+}
+
+.avatarWrapper {
+  margin-top: -65px; /* Pull only the avatar up to overlap the banner */
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.detailsWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 15px; /* Offset details to start below the banner line */
+  gap: 30px;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.usernameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .profileContent {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+  .avatarWrapper {
+    margin-top: -65px;
+  }
+  .detailsWrapper {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+    width: 100%;
+    gap: 20px;
+  }
+  .creatorDetails {
+    align-items: center;
+  }
+  .nameRow {
+    justify-content: center;
+  }
+  .usernameRow {
+    justify-content: center;
+  }
+}
+
+.avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-primary);
+  background: var(--bg-secondary);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+  flex-shrink: 0;
+  transition: all 0.3s var(--ease-apple);
+}
+
+.avatar:hover {
+  transform: scale(1.04);
+  box-shadow: 
+    0 0 0 4px rgba(139, 92, 246, 0.5),
+    0 0 20px rgba(139, 92, 246, 0.35);
+}
+
+.creatorDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+}
+
+.username {
+  font-size: 0.95rem;
+  color: var(--accent-primary);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.bio {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 10px;
+  max-width: 550px;
+}
+
+.editBtn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.editBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Statistics widgets */
+.statsPanel {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 8px;
+}
+
+.statBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  padding: 8px 18px;
+  border-radius: 12px;
+  min-width: 95px;
+  transition: all 0.3s var(--ease-apple);
+}
+
+.statBox:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(139, 92, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+.statNum {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* Badges styling */
+.badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badgePurple {
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  color: #c084fc;
+}
+
+.badgePink {
+  background: rgba(236, 72, 153, 0.12);
+  border: 1px solid rgba(236, 72, 153, 0.25);
+  color: #f472b6;
+}
+
+.badgeBlue {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+}
+
+/* Tabs Toggle Section */
+.tabSection {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: 30px;
+  padding-bottom: 2px;
+}
+
+.tabBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 12px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.tabBtn:hover {
+  color: white;
+}
+
+.tabActive {
+  color: white;
+}
+
+.tabActive::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+/* Publications Grid */
+.publicationsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .publicationsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .publicationsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gridCard {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.gridImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-apple);
+}
+
+.gridCard:hover .gridImg {
+  transform: scale(1.05);
+}
+
+.cardGlowHover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(8, 9, 13, 0.85) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 1;
+}
+
+.gridCard:hover .cardGlowHover {
+  opacity: 1;
+}
+
+.gridCardMeta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  z-index: 2;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s var(--ease-apple);
+  color: white;
+}
+
+.gridCard:hover .gridCardMeta {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.gridCardMeta h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.gridCardMeta p {
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modelCatBadge {
+  background: var(--accent-primary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.emptyTab {
+  text-align: center;
+  padding: 60px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Modals */
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 6, 8, 0.8);
+  backdrop-filter: blur(15px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 480px;
+  padding: 30px;
+  background: rgba(13, 15, 21, 0.8);
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.loadingWrapper, .errorWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: var(--text-secondary);
+  gap: 16px;
+}
+
+.spin {
+  animation: rotate 1.5s linear infinite;
+  color: var(--accent-primary);
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.fileUploadContainer {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border-glass);
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.fileInput {
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 100%;
+}
+
+.fileInput::file-selector-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+.fileInput::file-selector-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.bannerEditBtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(13, 15, 21, 0.65);
+  border: 1px solid var(--border-glass);
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.bannerEditBtn:hover {
+  background: var(--accent-primary);
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+}
+
+.avatarContainer {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.avatarEditOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 130px;
+  height: 130px;
+  background: rgba(5, 6, 8, 0);
+  color: transparent;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s var(--ease-apple);
+  z-index: 2;
+}
+
+.avatarContainer:hover .avatarEditOverlay {
+  background: rgba(5, 6, 8, 0.65);
+  color: white;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+}
+
+/* Tab Sizing and Actions container styling */
+.tabContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: 30px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.tabContainer .tabSection {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.tabActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+/* File upload dropzones & previews */
+.fileDropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border-glass);
+  border-radius: 12px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-apple);
+  gap: 8px;
+}
+
+.fileDropzone:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--accent-primary);
+}
+
+.uploadIcon {
+  color: var(--text-secondary);
+}
+
+.fileDropzone:hover .uploadIcon {
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+  transition: transform 0.2s;
+}
+
+.fileDropzone p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.imagePreviewContainer {
+  margin-top: 10px;
+  width: 100%;
+  max-height: 150px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--border-glass);
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card in grid to create new creations/models */
+.createCard {
+  border: 1px dashed var(--accent-primary) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 92, 246, 0.02) !important;
+  aspect-ratio: 4 / 3;
+}
+
+.createCard:hover {
+  background: rgba(139, 92, 246, 0.06) !important;
+  border-color: var(--accent-secondary) !important;
+}
+
+.createCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.createCard:hover .createCardContent {
+  color: white;
+}
+
+.deletePostBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(239, 68, 68, 0.85); /* Red background with slight transparency */
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  transition: all 0.25s var(--ease-apple);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.gridCard:hover .deletePostBtn {
+  opacity: 1;
+}
+
+.deletePostBtn:hover {
+  background: rgb(239, 68, 68);
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+}

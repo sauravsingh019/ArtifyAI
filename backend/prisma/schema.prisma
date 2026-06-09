@@ -1,0 +1,98 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String        @id // Clerk User ID (e.g. user_...)
+  email            String        @unique
+  username         String        @unique
+  name             String?
+  avatarUrl        String?
+  bannerUrl        String?
+  bio              String?
+  posts            Post[]
+  models           Model3D[]
+  comments         Comment[]
+  likes            Like[]
+  sentMessages     ChatMessage[] @relation("sentMessages")
+  receivedMessages ChatMessage[] @relation("receivedMessages")
+  communitiesCreated Community[] @relation("creator")
+  communitiesJoined  Community[] @relation("members")
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model Post {
+  id         String    @id @default(uuid())
+  imageUrl   String
+  caption    String
+  category   String
+  authorId   String
+  author     User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  likes      Like[]
+  comments   Comment[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Model3D {
+  id           String   @id @default(uuid())
+  name         String
+  description  String?
+  modelUrl     String   // URL to GLB/GLTF file
+  thumbnailUrl String?  // Optional thumbnail image
+  category     String
+  authorId     String
+  author       User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Community {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  coverImage  String?
+  creatorId   String
+  creator     User     @relation("creator", fields: [creatorId], references: [id], onDelete: Cascade)
+  members     User[]   @relation("members")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ChatMessage {
+  id         String   @id @default(uuid())
+  senderId   String
+  sender     User     @relation("sentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiverId String
+  receiver   User     @relation("receivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  content    String
+  createdAt  DateTime @default(now())
+}

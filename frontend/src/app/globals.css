@@ -1,0 +1,481 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #08090d;
+  --bg-secondary: #0d0f15;
+  --accent-primary: #8b5cf6;
+  --accent-secondary: #ec4899;
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --bg-glass: rgba(13, 15, 21, 0.7);
+  --bg-glass-card: rgba(255, 255, 255, 0.02);
+  --glow-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.15);
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-outfit: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-outfit);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background animated mesh gradient */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Glass Container Style */
+.glass-container {
+  background: var(--bg-glass);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+}
+
+.glass-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  transition: all 0.4s var(--ease-apple);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--glow-shadow);
+}
+
+/* Text Input Styling */
+.glass-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  color: var(--text-primary);
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.3s var(--ease-apple);
+  outline: none;
+}
+
+.glass-input:focus {
+  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+}
+
+/* Dropdown select option dark mode styling */
+select.glass-input {
+  cursor: pointer;
+}
+
+select.glass-input option {
+  background-color: #0d0f15 !important;
+  color: #ffffff !important;
+}
+
+/* Custom premium button */
+.glass-btn {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, #6366f1 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s var(--ease-apple);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+}
+
+.glass-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+  filter: brightness(1.1);
+}
+
+.glass-btn:active {
+  transform: translateY(0);
+}
+
+.glass-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+}
+
+.glass-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Utility layout styles */
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  margin-left: 280px; /* offset for sidebar */
+  max-width: calc(100vw - 280px);
+  animation: layoutContentFadeIn 0.8s var(--ease-apple) forwards;
+}
+
+@keyframes layoutContentFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.layout-full {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevents scrollbars on landing page */
+}
+
+.main-content-full {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 80px;
+    max-width: calc(100vw - 80px);
+    padding: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    margin-left: 0;
+    max-width: 100vw;
+    margin-bottom: 80px; /* navigation is at bottom on mobile */
+    padding: 16px;
+  }
+  
+  .main-content-full {
+    padding: 24px 16px;
+  }
+}
+
+/* ==========================================================================
+   CLERK ACCESSIBILITY & CONTRAST OVERRIDES
+   ========================================================================== */
+
+/* Force GitHub Logo to be white in dark mode - targeting both img and svg implementations */
+.cl-socialButtonsBlockButton[data-provider="github"] img,
+.cl-socialButtonsBlockButton[data-provider="github"] svg,
+button[data-provider="github"] img,
+button[data-provider="github"] svg,
+.cl-socialButtonsBlockButton__github img,
+.cl-socialButtonsBlockButton__github svg,
+[data-provider="github"] img,
+[data-provider="github"] svg,
+img[alt*="GitHub" i],
+img[src*="github" i],
+svg[class*="github" i] {
+  filter: invert(1) brightness(2) !important;
+  opacity: 1 !important;
+}
+
+/* Hide Chrome/Edge native password reveal/clear buttons to prevent clashing with Clerk's custom toggle */
+input::-ms-reveal,
+input::-ms-clear,
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Force password visibility eye button to be transparent and borderless (removes grey pill) */
+.cl-formFieldInputShowPasswordButton,
+button.cl-formFieldInputShowPasswordButton,
+.cl-formFieldInputShowPasswordIcon,
+[class*="formFieldInputShowPasswordButton"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+  color: #8b5cf6 !important; /* Premium purple */
+  opacity: 0.85 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.cl-formFieldInputShowPasswordButton:hover,
+button.cl-formFieldInputShowPasswordButton:hover,
+[class*="formFieldInputShowPasswordButton"]:hover {
+  opacity: 1 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Force password visibility eye image icon to be purple using CSS colorize filter */
+.cl-formFieldInputShowPasswordButton img,
+[class*="formFieldInputShowPasswordButton"] img {
+  filter: invert(44%) sepia(94%) saturate(3015%) hue-rotate(242deg) brightness(99%) contrast(97%) !important;
+  opacity: 1 !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Force password visibility eye SVG icon to be purple */
+.cl-formFieldInputShowPasswordButton svg,
+[class*="formFieldInputShowPasswordButton"] svg {
+  opacity: 1 !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: #8b5cf6 !important;
+}
+
+/* Color outlines and strokes of the eye SVG paths purple, preserving hollow shape */
+.cl-formFieldInputShowPasswordButton svg path,
+[class*="formFieldInputShowPasswordButton"] svg path,
+.cl-formFieldInputShowPasswordButton svg *,
+[class*="formFieldInputShowPasswordButton"] svg * {
+  color: #8b5cf6 !important;
+}
+
+.cl-formFieldInputShowPasswordButton svg [stroke],
+[class*="formFieldInputShowPasswordButton"] svg [stroke] {
+  stroke: #8b5cf6 !important;
+}
+
+.cl-formFieldInputShowPasswordButton svg [fill]:not([fill="none"]),
+[class*="formFieldInputShowPasswordButton"] svg [fill]:not([fill="none"]) {
+  fill: #8b5cf6 !important;
+}
+
+.cl-formFieldInputShowPasswordButton svg [fill="none"],
+[class*="formFieldInputShowPasswordButton"] svg [fill="none"] {
+  fill: none !important;
+}
+
+/* Force all input fields inside Clerk authentication forms to be highly visible */
+.cl-formFieldInput, 
+.cl-input,
+input.cl-formFieldInput,
+input.cl-input,
+.cl-formFieldInputShowPasswordButtonParent input {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  font-size: 0.82rem !important;
+  padding: 6px 10px !important;
+  height: 32px !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.cl-formFieldInput::placeholder,
+.cl-input::placeholder,
+input.cl-formFieldInput::placeholder,
+input.cl-input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* High visibility focus states for Clerk input boxes */
+.cl-formFieldInput:focus, 
+.cl-input:focus,
+input.cl-formFieldInput:focus,
+input.cl-input:focus,
+.cl-formFieldInputShowPasswordButtonParent input:focus {
+  border-color: #8b5cf6 !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25) !important;
+}
+
+/* ==========================================================================
+   CLERK USER BUTTON & PROFILE MODAL COMPACT STYLING
+   ========================================================================== */
+
+/* User Button Popover Card: Smaller and dark themed */
+.cl-userButtonPopoverCard {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-glass) !important;
+  box-shadow: var(--glow-shadow) !important;
+  width: 290px !important; /* Smaller size */
+  max-width: 90vw !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Make inner elements adapt to dark theme */
+.cl-userButtonPopoverMain,
+.cl-userButtonPopoverFooter {
+  background-color: var(--bg-secondary) !important;
+}
+
+/* Popover user avatar details header container */
+.cl-userPreview {
+  padding: 12px !important;
+}
+
+.cl-userPreviewTitle {
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+}
+
+.cl-userPreviewSubtitle {
+  font-size: 0.8rem !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Popover Action Buttons: smaller and darker */
+.cl-userButtonPopoverActionButton {
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  margin: 2px 4px !important;
+  color: var(--text-primary) !important;
+  transition: all 0.2s var(--ease-apple) !important;
+}
+
+.cl-userButtonPopoverActionButton:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.cl-userButtonPopoverActionButtonText {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 0.85rem !important;
+}
+
+.cl-userButtonPopoverActionButtonIcon {
+  color: var(--accent-primary) !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Footer "Secured by Clerk" */
+.cl-userButtonPopoverFooter {
+  border-top: 1px solid var(--border-glass) !important;
+  padding: 8px 12px !important;
+}
+
+.cl-userButtonPopoverFooter a,
+.cl-userButtonPopoverFooter span {
+  font-size: 0.72rem !important;
+  color: var(--text-secondary) !important;
+  opacity: 0.6;
+}
+
+.cl-userButtonPopoverFooter a:hover {
+  opacity: 1;
+  color: var(--accent-primary) !important;
+}
+
+/* User Profile Modal Custom Sizing */
+.cl-userProfileModalCard {
+  max-width: 800px !important; /* Compact size */
+  max-height: 600px !important;
+  width: 90% !important;
+  height: 80% !important;
+  border: 1px solid var(--border-glass) !important;
+  background-color: var(--bg-secondary) !important;
+  box-shadow: var(--glow-shadow) !important;
+  border-radius: 16px !important;
+}
+
+/* Modal backdrop blur override */
+.cl-modalBackdrop {
+  backdrop-filter: blur(8px) !important;
+  background-color: rgba(5, 6, 10, 0.75) !important;
+}
+
+/* Clerk User Profile Modal Close Button */
+.cl-userProfileModalCloseButton {
+  color: var(--text-secondary) !important;
+  transition: color 0.2s ease !important;
+}
+
+.cl-userProfileModalCloseButton:hover {
+  color: var(--text-primary) !important;
+}
+
+/* Clerk inside profile pages elements styling */
+.cl-userProfile-root {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+.cl-profileSection {
+  border-bottom: 1px solid var(--border-glass) !important;
+}
+
+

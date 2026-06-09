@@ -1,0 +1,293 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff 40%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Main Layout Grid */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  gap: 30px;
+  align-items: start;
+}
+
+@media (max-width: 968px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.panelSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.promptTextarea {
+  width: 100%;
+  height: 120px;
+  resize: none;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Aspect Ratio Selectors */
+.ratioGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.ratioCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-apple);
+  font-family: inherit;
+  color: var(--text-secondary);
+}
+
+.ratioCard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+}
+
+.ratioActive {
+  border-color: var(--accent-primary);
+  background: rgba(139, 92, 246, 0.1);
+  color: white;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+.ratioVisual {
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  opacity: 0.8;
+  transition: all 0.3s;
+}
+
+.ratioLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.categorySelect {
+  width: 100%;
+}
+
+.generateBtn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1rem;
+}
+
+.spin {
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Output Panel */
+.outputPanel {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Empty Viewport state */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-secondary);
+  gap: 16px;
+  max-width: 320px;
+}
+
+.emptyIcon {
+  opacity: 0.15;
+  color: white;
+}
+
+.emptyState h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.emptyState p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Loading sequence card */
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+  gap: 16px;
+}
+
+.pulsingGlow {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.spinLarge {
+  animation: rotate 2s linear infinite;
+  color: var(--accent-primary);
+}
+
+.loadingMessage {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+  margin-top: 10px;
+}
+
+.loadingSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Result Card */
+.resultContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.viewportFrame {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border-glass);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Image controls overlay */
+.imageOverlay {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  gap: 8px;
+}
+
+.overlayBtn {
+  background: rgba(13, 15, 21, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-glass);
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.overlayBtn:hover {
+  transform: scale(1.1);
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Publish Box */
+.publishBox {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.publishHeading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #e2e8f0;
+}
+
+.publishActions {
+  display: flex;
+  gap: 12px;
+}

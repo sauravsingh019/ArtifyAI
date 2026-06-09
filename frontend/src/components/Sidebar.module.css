@@ -1,0 +1,240 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: var(--bg-glass);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-right: 1px solid var(--border-glass);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 24px;
+  z-index: 1000;
+  transition: all 0.4s var(--ease-apple);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 40px;
+  padding-left: 12px;
+}
+
+.logoText {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #fff 30%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logoDot {
+  color: var(--accent-secondary);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 0;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.navItem {
+  width: 100%;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s var(--ease-apple);
+  position: relative;
+  overflow: hidden;
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.navLink.active {
+  color: #fff;
+  background: rgba(139, 92, 246, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(139, 92, 246, 0.25);
+}
+
+.navLink.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  height: 70%;
+  width: 4px;
+  background: var(--accent-primary);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.icon {
+  transition: transform 0.3s var(--ease-apple);
+}
+
+.navLink:hover .icon {
+  transform: scale(1.1);
+}
+
+.linkText {
+  display: inline-block;
+}
+
+.footer {
+  border-top: 1px solid var(--border-glass);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.userRole {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.loginBtn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--accent-primary);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.loginBtn:hover {
+  background: #7c3aed;
+}
+
+.loadingSpinner {
+  animation: spin 1s linear infinite;
+  color: var(--accent-primary);
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Tablet Responsive Sidebar (Compact Mode) */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 80px;
+    padding: 30px 14px;
+    align-items: center;
+  }
+
+  .logoContainer {
+    display: none;
+  }
+
+  .linkText, .userMeta {
+    display: none;
+  }
+
+  .navLink {
+    padding: 14px;
+    justify-content: center;
+  }
+
+  .navLink.active::before {
+    display: none;
+  }
+
+  .footer {
+    padding-top: 15px;
+    justify-content: center;
+  }
+}
+
+/* Mobile Responsive Sidebar (Bottom Dock Mode) */
+@media (max-width: 640px) {
+  .sidebar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    border-right: none;
+    border-top: 1px solid var(--border-glass);
+    flex-direction: row;
+    padding: 0 10px;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .navList {
+    flex-direction: row;
+    gap: 0;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0;
+  }
+
+  .navItem {
+    width: auto;
+  }
+
+  .navLink {
+    padding: 10px;
+    border-radius: 50%;
+  }
+
+  .navLink.active {
+    background: transparent;
+    color: var(--accent-primary);
+    box-shadow: none;
+  }
+
+  .footer {
+    display: none; /* Hide footer on mobile bottom nav */
+  }
+}
