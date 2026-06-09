@@ -31,6 +31,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isMocked, setIsMocked] = useState(false);
   const [activeTab, setActiveTab] = useState('posts'); // 'posts' or 'models'
 
   // Edit states
@@ -598,6 +599,7 @@ export default function ProfilePage() {
         setEditBio(data.bio || '');
         setEditAvatarUrl(data.avatarUrl || '');
         setEditBannerUrl(data.bannerUrl || '');
+        setIsMocked(false);
       } else {
         const errData = await res.json().catch(() => ({}));
         const errMsg = errData.error || `Response status: ${res.status}`;
@@ -663,6 +665,7 @@ export default function ProfilePage() {
           setEditAvatarUrl(fallback.avatarUrl || '');
           setEditBannerUrl(fallback.bannerUrl || '');
           setErrorMessage('');
+          setIsMocked(true);
         } else {
           setError(true);
         }
@@ -679,6 +682,7 @@ export default function ProfilePage() {
         setEditAvatarUrl(fallback.avatarUrl || '');
         setEditBannerUrl(fallback.bannerUrl || '');
         setErrorMessage('');
+        setIsMocked(true);
       } else {
         setError(true);
       }
@@ -787,6 +791,14 @@ export default function ProfilePage() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={styles.container}
     >
+      {isMocked && (
+        <div style={{ backgroundColor: 'rgba(236, 72, 153, 0.1)', border: '1px solid rgba(236, 72, 153, 0.3)', color: '#fbcfe8', padding: '12px 20px', borderRadius: '12px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '1.2rem' }}>⚠️</span>
+          <div>
+            <strong>Offline Mode:</strong> Could not connect to backend ({API_URL}). Showing local mock profile.
+          </div>
+        </div>
+      )}
       {/* Dynamic Profile Header Banner */}
       <div className={`glass-card ${styles.profileHeader}`}>
         <div 
