@@ -1,4 +1,5 @@
 # 🎨 ArtifyAI — AI-Powered Creative Platform for 3D Artists & Digital Creators
+🌐 Live App: https://artify-ai-virid.vercel.app/
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
 ![React](https://img.shields.io/badge/React-19-blue)
